@@ -1,13 +1,17 @@
 package tests;
 
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.ITestResult;
+import org.testng.annotations.*;
 import pages.HomePage;
 import utilities.BrowserActions;
 import utilities.UIActions;
+
+import java.io.File;
+import java.io.IOException;
 
 public class GoToDressesTests {
     String className = GoToDressesTests.class.getName();
@@ -32,4 +36,20 @@ public class GoToDressesTests {
     public void tearDown() {
         BrowserActions.closeDriverAndRemoveFromMap(className);
     }
+
+    @AfterMethod
+    public static void takeScreeshot(ITestResult result) throws IOException {
+        if (ITestResult.FAILURE == result.getStatus()) {
+            String className = AccountTests.class.getName();
+            TakesScreenshot screenshot = (TakesScreenshot) BrowserActions.getDriver(className);
+            File source = screenshot.getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(source, new File("./screenshots/" + ".png"));
+        }
+    }
+
+
 }
+
+
+
+

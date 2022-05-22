@@ -1,8 +1,15 @@
 package utilities;
 
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.ITestResult;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 
 public class BrowserActions {
@@ -28,5 +35,10 @@ public class BrowserActions {
     public static void closeDriverAndRemoveFromMap(String className){
         drivers.get(className).close();
         drivers.remove(className);
+    }
+
+    public static WebDriver getDriver(String className){
+        driver = drivers.get(className);
+        return driver;
     }
 }
