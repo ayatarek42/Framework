@@ -10,11 +10,11 @@ public class BrowserActions {
     public  static WebDriver driver;
 
     public static void initializer(String className,String browserName) {
-        if (browserName == "Chrome") {
+        if (browserName.equalsIgnoreCase("Chrome")) {
             System.setProperty("webdriver.chrome.driver", "Resources/chromedriver.exe");
             drivers.put(className, new ChromeDriver());
 
-        } else if (browserName == "Firefox") {
+        } else if (browserName.equalsIgnoreCase("Firefox")) {
             System.setProperty("webdriver.gecko.driver", "Resources/geckodriver.exe");
             drivers.put(className, new FirefoxDriver());
 

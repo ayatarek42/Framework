@@ -1,6 +1,7 @@
 package tests;
 
 
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -22,8 +23,9 @@ public class AccountTests {
 
 
     @BeforeClass
-    public void launchBrowser(){
-        BrowserActions.initializer(className,"Chrome");
+    @Parameters({"browser"})
+    public void launchBrowser(String browserName){
+        BrowserActions.initializer(className,browserName);
         homePage = new HomePage(className);
         homePage.navigateToHome();
     }
@@ -45,6 +47,11 @@ public class AccountTests {
     public  void goToProfile() {
 
         womenPage.clickProfile();
+    }
+
+    @AfterClass
+    public void tearDown(){
+        BrowserActions.closeDriverAndRemoveFromMap(className);
     }
 
 }
