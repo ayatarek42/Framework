@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="4" passed="4">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Parallel Testing Suite" duration-ms="73065" started-at="2022-05-23T16:01:16 EET" finished-at="2022-05-23T16:02:29 EET">
+    <groups>
+      <group name="loginGroup">
+        <method signature="AccountTests.Login()[pri:0, instance:tests.AccountTests@7e2d773b]" name="Login" class="tests.AccountTests"/>
+      </group> <!-- loginGroup -->
+    </groups>
+    <test name="My account page" duration-ms="73065" started-at="2022-05-23T16:01:16 EET" finished-at="2022-05-23T16:02:29 EET">
+      <class name="tests.GoToDressesTests">
+        <test-method status="PASS" signature="launchBrowser(java.lang.String)[pri:0, instance:tests.GoToDressesTests@42f93a98]" name="launchBrowser" is-config="true" duration-ms="25002" started-at="2022-05-23T16:01:16 EET" finished-at="2022-05-23T16:01:41 EET">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Firefox]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- launchBrowser -->
+        <test-method status="PASS" signature="goToDressesPage()[pri:0, instance:tests.GoToDressesTests@42f93a98]" name="goToDressesPage" duration-ms="5305" started-at="2022-05-23T16:01:41 EET" finished-at="2022-05-23T16:01:47 EET">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- goToDressesPage -->
+        <test-method status="PASS" signature="takeScreeshot(org.testng.ITestResult)[pri:0, instance:tests.GoToDressesTests@42f93a98]" name="takeScreeshot" is-config="true" duration-ms="3" started-at="2022-05-23T16:01:47 EET" finished-at="2022-05-23T16:01:47 EET">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=goToDressesPage status=SUCCESS method=GoToDressesTests.goToDressesPage()[pri:0, instance:tests.GoToDressesTests@42f93a98] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- takeScreeshot -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:tests.GoToDressesTests@42f93a98]" name="tearDown" is-config="true" duration-ms="1235" started-at="2022-05-23T16:01:47 EET" finished-at="2022-05-23T16:01:48 EET">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- tests.GoToDressesTests -->
+      <class name="tests.AccountTests">
+        <test-method status="PASS" signature="launchBrowser(java.lang.String)[pri:0, instance:tests.AccountTests@7e2d773b]" name="launchBrowser" is-config="true" duration-ms="24198" started-at="2022-05-23T16:01:16 EET" finished-at="2022-05-23T16:01:40 EET">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Chrome]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- launchBrowser -->
+        <test-method status="PASS" signature="Login()[pri:0, instance:tests.AccountTests@7e2d773b]" name="Login" duration-ms="25790" started-at="2022-05-23T16:01:40 EET" finished-at="2022-05-23T16:02:06 EET">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Login -->
+        <test-method status="PASS" signature="takeScreeshot(org.testng.ITestResult)[pri:0, instance:tests.AccountTests@7e2d773b]" name="takeScreeshot" is-config="true" duration-ms="0" started-at="2022-05-23T16:02:06 EET" finished-at="2022-05-23T16:02:06 EET">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=Login status=SUCCESS method=AccountTests.Login()[pri:0, instance:tests.AccountTests@7e2d773b] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- takeScreeshot -->
+        <test-method status="PASS" signature="goToWomen()[pri:0, instance:tests.AccountTests@7e2d773b]" name="goToWomen" duration-ms="15741" depends-on-groups="loginGroup" started-at="2022-05-23T16:02:06 EET" finished-at="2022-05-23T16:02:22 EET">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- goToWomen -->
+        <test-method status="PASS" signature="takeScreeshot(org.testng.ITestResult)[pri:0, instance:tests.AccountTests@7e2d773b]" name="takeScreeshot" is-config="true" duration-ms="1" started-at="2022-05-23T16:02:22 EET" finished-at="2022-05-23T16:02:22 EET">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=goToWomen status=SUCCESS method=AccountTests.goToWomen()[pri:0, instance:tests.AccountTests@7e2d773b] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- takeScreeshot -->
+        <test-method status="PASS" signature="goToProfile()[pri:0, instance:tests.AccountTests@7e2d773b]" name="goToProfile" duration-ms="7102" started-at="2022-05-23T16:02:22 EET" depends-on-methods="tests.AccountTests.goToWomen" finished-at="2022-05-23T16:02:29 EET">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- goToProfile -->
+        <test-method status="PASS" signature="takeScreeshot(org.testng.ITestResult)[pri:0, instance:tests.AccountTests@7e2d773b]" name="takeScreeshot" is-config="true" duration-ms="2" started-at="2022-05-23T16:02:29 EET" finished-at="2022-05-23T16:02:29 EET">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=goToProfile status=SUCCESS method=AccountTests.goToProfile()[pri:0, instance:tests.AccountTests@7e2d773b] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- takeScreeshot -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:tests.AccountTests@7e2d773b]" name="tearDown" is-config="true" duration-ms="160" started-at="2022-05-23T16:02:29 EET" finished-at="2022-05-23T16:02:29 EET">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- tests.AccountTests -->
+    </test> <!-- My account page -->
+  </suite> <!-- Parallel Testing Suite -->
+</testng-results>

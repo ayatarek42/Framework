@@ -1,0 +1,9 @@
+assertions\AssertionsClass.class
+utilities\BrowserActions.class
+pages\Dresses.class
+pages\HomePage.class
+pages\RegisterationPage.class
+pages\WomenPage.class
+utilities\UIActions.class
+pages\MyAccountPage.class
+pages\SignIn.class
