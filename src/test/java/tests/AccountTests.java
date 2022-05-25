@@ -1,5 +1,7 @@
 package tests;
 
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
 import data.ExcelReader;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -13,6 +15,8 @@ import pages.WomenPage;
 import utilities.BrowserActions;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 
 
@@ -26,12 +30,7 @@ public class AccountTests {
 
     String className = AccountTests.class.getName();
 
-
-    @DataProvider(name = "ExcelData")
-    public Object[][] userLoginData() throws IOException {
-        ExcelReader exReader = new ExcelReader();
-        return exReader.getExcelDataLogin();
-    }
+    CSVReader reader;
 
     @BeforeClass
     @Parameters({"browser"})
@@ -42,12 +41,19 @@ public class AccountTests {
     }
 
 
-    @Test(groups = "loginGroup", dataProvider = "ExcelData")
-    public void Login(String email, String password) {
+    @Test(groups = "loginGroup")
+    public void Login() throws IOException, CsvValidationException {
+        String csv_file = System.getProperty("user.dir") + "/src/test/java/data/loginData.csv";
+        reader = new CSVReader(new FileReader(csv_file));
+        String[] csvCell;
+        while((csvCell = reader.readNext()) != null){
+        String email = csvCell[0];
+        String password = csvCell[1];
         signInPage = homePage.clickOnSignIn();
         signInPage.enterEmailToLogin(email);
         signInPage.enterPasswordToLogin(password);
         myAccount = signInPage.clickOnLoginButton();
+        }
     }
 
     @Test(dependsOnGroups = "loginGroup")

@@ -14,46 +14,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class ExcelReader {
-    static FileInputStream loginFile = null;
 
-    public FileInputStream getFileInputStreamLog(){
-        String filePath = System.getProperty("user.dir") + "/src/test/java/data/loginData.xlsx";
-        File srcFile = new File(filePath);
-        try {
-            loginFile = new FileInputStream(srcFile);
-        }
-        catch(FileNotFoundException e){
-            System.out.println("Error occured :" + e.getMessage());
-            System.exit(0);
-        }
-        return  loginFile;
-    }
-
-
-    public Object[][] getExcelDataLogin() throws IOException {
-        loginFile = getFileInputStreamLog();
-        XSSFWorkbook wb = new XSSFWorkbook( loginFile);
-        DataFormatter fmt = new DataFormatter();
-        XSSFSheet sheet = wb.getSheetAt(0);
-        int totalNoOfRows = sheet.getLastRowNum()+1;
-        int totalNoOfColumns = 2;
-        String [][] excelData = new String[totalNoOfRows][totalNoOfColumns];
-        for (int i=0; i< totalNoOfRows; i++){
-            for (int j=0; j < totalNoOfColumns; j++){
-                XSSFRow row = sheet.getRow(i);
-                Cell cell = row.getCell(j);
-                excelData[i][j] = fmt.formatCellValue(cell);
-
-            }
-        }
-        wb.close();
-        return excelData;
-    }
-
-
-
-
-    /////////////////////////////// Registration data //////////////////////////////////
+// Registration data
 
     static FileInputStream registerFile = null;
     public FileInputStream getFileInputStreamReg(){
