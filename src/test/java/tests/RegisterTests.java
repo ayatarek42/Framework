@@ -28,6 +28,15 @@ public class RegisterTests{
     RegisterationPage registerPage;
     String className =  RegisterTests.class.getName();
 
+
+    @BeforeClass
+    public void launchBrowser(){
+        BrowserActions.initializer(className,"Chrome");
+        homePage = new HomePage(className);
+        homePage.navigateToHome();
+        signInPage = homePage.clickOnSignIn();
+    }
+
     @DataProvider(name = "ExcelDataEmail")
     public Object[][] userRegisterDataEmail() throws IOException {
         ExcelReader exReader = new ExcelReader();
@@ -56,14 +65,6 @@ public class RegisterTests{
     public Object[][] userRegisterDataAddress() throws IOException {
         ExcelReader exReader = new ExcelReader();
         return exReader.getExcelDataRegistrationAddress();
-    }
-
-    @BeforeClass
-    public void launchBrowser(){
-        BrowserActions.initializer(className,"Chrome");
-        homePage = new HomePage(className);
-        homePage.navigateToHome();
-        signInPage = homePage.clickOnSignIn();
     }
 
     @Test(dataProvider = "ExcelDataEmail")

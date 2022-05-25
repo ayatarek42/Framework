@@ -3,12 +3,10 @@ package tests;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import pages.HomePage;
 import utilities.BrowserActions;
-import utilities.UIActions;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,7 +38,7 @@ public class GoToDressesTests {
     @AfterMethod
     public static void takeScreeshot(ITestResult result) throws IOException {
         if (ITestResult.FAILURE == result.getStatus()) {
-            String className = AccountTests.class.getName();
+            String className = MyAccountTests.class.getName();
             TakesScreenshot screenshot = (TakesScreenshot) BrowserActions.getDriver(className);
             File source = screenshot.getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(source, new File("./screenshots/" + ".png"));
