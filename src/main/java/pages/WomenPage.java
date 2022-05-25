@@ -16,7 +16,7 @@ public class WomenPage{
     }
 
     public void clickProfile(){
-        action.findWebElement(profile).click();
+        action.clickOnElement(profile);
     }
 
 

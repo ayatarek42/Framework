@@ -24,13 +24,13 @@ public class HomePage {
 
     public SignIn clickOnSignIn()
     {
-        action.findWebElement(signIn).click();
+        action.clickOnElement(signIn);
         return new SignIn(className);
     }
 
     public Dresses clickOnDresses()
     {
-        action.findWebElement(dressesBtn).click();
+        action.clickOnElement(dressesBtn);
         return new Dresses();
     }
 }

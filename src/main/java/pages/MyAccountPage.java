@@ -16,7 +16,7 @@ public class MyAccountPage {
     }
 
     public WomenPage clickOnWomen(){
-            action.findWebElement(women).click();
+            action.clickOnElement(women);
             return new WomenPage(className);
         }
 }
