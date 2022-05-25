@@ -20,9 +20,6 @@ import utilities.UIActions;
 import java.io.File;
 import java.io.IOException;
 
-
-
-
 public class RegisterTests{
 
     HomePage homePage;
@@ -74,7 +71,7 @@ public class RegisterTests{
         signInPage.enterEmailToRegister(email);
         registerPage = signInPage.clickOnCreateAccount();
         UIActions action = new UIActions(className);
-        action.waitForTime(30);
+        action.waitForTime(10);
         //assertEquals(BrowserActions.driver.getTitle(),"Login - My Store");
     }
 

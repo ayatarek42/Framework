@@ -61,6 +61,11 @@ public class AccountTests {
         womenPage.clickProfile();
     }
 
+    @Test(dependsOnMethods = "goToProfile")
+    public void logout(){
+        myAccount.clickOnSignOut();
+    }
+
     @AfterClass
     public void tearDown() {
         BrowserActions.closeDriverAndRemoveFromMap(className);

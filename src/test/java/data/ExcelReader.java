@@ -1,5 +1,9 @@
 package data;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -29,6 +33,7 @@ public class ExcelReader {
     public Object[][] getExcelDataLogin() throws IOException {
         loginFile = getFileInputStreamLog();
         XSSFWorkbook wb = new XSSFWorkbook( loginFile);
+        DataFormatter fmt = new DataFormatter();
         XSSFSheet sheet = wb.getSheetAt(0);
         int totalNoOfRows = sheet.getLastRowNum()+1;
         int totalNoOfColumns = 2;
@@ -36,7 +41,8 @@ public class ExcelReader {
         for (int i=0; i< totalNoOfRows; i++){
             for (int j=0; j < totalNoOfColumns; j++){
                 XSSFRow row = sheet.getRow(i);
-                excelData[i][j] = row.getCell(j).toString();
+                Cell cell = row.getCell(j);
+                excelData[i][j] = fmt.formatCellValue(cell);
 
             }
         }
@@ -67,6 +73,7 @@ public class ExcelReader {
     public Object[][] getExcelDataRegistrationEmail() throws IOException {
         registerFile = getFileInputStreamReg();
         XSSFWorkbook wb = new XSSFWorkbook( registerFile);
+        DataFormatter fmt = new DataFormatter();
         XSSFSheet email = wb.getSheetAt(0);
         int totalNoOfRows = email.getLastRowNum()+1;
         int totalNoOfColumns = 1;
@@ -74,8 +81,8 @@ public class ExcelReader {
         for (int i=0; i< totalNoOfRows; i++) {
             for (int j = 0; j < totalNoOfColumns; j++) {
                 XSSFRow row = email.getRow(i);
-                excelData[i][j] = row.getCell(j).toString();
-
+                Cell cell = row.getCell(j);
+                excelData[i][j] = fmt.formatCellValue(cell);
             }
         }
 
@@ -87,6 +94,7 @@ public class ExcelReader {
     public Object[][] getExcelDataRegistrationName() throws IOException {
         registerFile = getFileInputStreamReg();
         XSSFWorkbook wb = new XSSFWorkbook( registerFile);
+        DataFormatter fmt = new DataFormatter();
         XSSFSheet sheet = wb.getSheetAt(1);
         int totalNoOfRows = sheet.getLastRowNum()+1;
         int totalNoOfColumns = 2;
@@ -94,7 +102,8 @@ public class ExcelReader {
         for (int i=0; i< totalNoOfRows; i++) {
             for (int j = 0; j < totalNoOfColumns; j++) {
                 XSSFRow row = sheet.getRow(i);
-                excelData[i][j] = row.getCell(j).toString();
+                Cell cell = row.getCell(j);
+                excelData[i][j] = fmt.formatCellValue(cell);
 
             }
         }
@@ -107,6 +116,7 @@ public class ExcelReader {
     public Object[][] getExcelDataRegistrationPassword() throws IOException {
         registerFile = getFileInputStreamReg();
         XSSFWorkbook wb = new XSSFWorkbook( registerFile);
+        DataFormatter fmt = new DataFormatter();
         XSSFSheet sheet = wb.getSheetAt(2);
         int totalNoOfRows = sheet.getLastRowNum()+1;
         int totalNoOfColumns = 1;
@@ -114,8 +124,8 @@ public class ExcelReader {
         for (int i=0; i< totalNoOfRows; i++) {
             for (int j = 0; j < totalNoOfColumns; j++) {
                 XSSFRow row = sheet.getRow(i);
-                excelData[i][j] = row.getCell(j).toString();
-
+                Cell cell = row.getCell(j);
+                excelData[i][j] = fmt.formatCellValue(cell);
             }
         }
 
@@ -127,6 +137,7 @@ public class ExcelReader {
     public Object[][] getExcelDataRegistrationDateOfBirth() throws IOException {
         registerFile = getFileInputStreamReg();
         XSSFWorkbook wb = new XSSFWorkbook( registerFile);
+        DataFormatter fmt = new DataFormatter();
         XSSFSheet sheet = wb.getSheetAt(3);
         int totalNoOfRows = sheet.getLastRowNum()+1;
         int totalNoOfColumns = 3;
@@ -134,8 +145,8 @@ public class ExcelReader {
         for (int i=0; i< totalNoOfRows; i++) {
             for (int j = 0; j < totalNoOfColumns; j++) {
                 XSSFRow row = sheet.getRow(i);
-                excelData[i][j] = row.getCell(j).toString();
-
+                Cell cell = row.getCell(j);
+                excelData[i][j] = fmt.formatCellValue(cell);
             }
         }
 
@@ -147,6 +158,7 @@ public class ExcelReader {
     public Object[][] getExcelDataRegistrationAddress() throws IOException {
         registerFile = getFileInputStreamReg();
         XSSFWorkbook wb = new XSSFWorkbook( registerFile);
+        DataFormatter fmt = new DataFormatter();
         XSSFSheet sheet = wb.getSheetAt(4);
         int totalNoOfRows = sheet.getLastRowNum()+1;
         int totalNoOfColumns = 5;
@@ -154,7 +166,8 @@ public class ExcelReader {
         for (int i=0; i< totalNoOfRows; i++) {
             for (int j = 0; j < totalNoOfColumns; j++) {
                 XSSFRow row = sheet.getRow(i);
-                excelData[i][j] = row.getCell(j).toString();
+                Cell cell = row.getCell(j);
+                excelData[i][j] = fmt.formatCellValue(cell);
 
             }
         }
@@ -162,6 +175,4 @@ public class ExcelReader {
         wb.close();
         return excelData;
     }
-
-
 }

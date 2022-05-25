@@ -6,6 +6,7 @@ import utilities.UIActions;
 public class MyAccountPage {
 
        By women = By.linkText("Women");
+       By signOut = By.linkText("Sign out");
        UIActions action ;
        String className;
 
@@ -19,4 +20,9 @@ public class MyAccountPage {
             action.clickOnElement(women);
             return new WomenPage(className);
         }
+
+    public HomePage clickOnSignOut(){
+        action.clickOnElement(signOut);
+        return new HomePage(className);
+    }
 }
