@@ -1,12 +1,13 @@
 package tests;
 
+import data.ExcelReader;
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.MyAccountPage;
@@ -15,38 +16,67 @@ import pages.SignIn;
 import utilities.BrowserActions;
 import utilities.UIActions;
 
+
 import java.io.File;
 import java.io.IOException;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
-import static utilities.BrowserActions.drivers;
+
 
 
 public class RegisterTests{
-    protected HomePage homePage;
-    protected SignIn signInPage;
-    protected MyAccountPage myAccount;
-    protected RegisterationPage registerPage;
+
+    HomePage homePage;
+    SignIn signInPage;
+    MyAccountPage myAccount;
+    RegisterationPage registerPage;
     String className =  RegisterTests.class.getName();
 
+    @DataProvider(name = "ExcelDataEmail")
+    public Object[][] userRegisterDataEmail() throws IOException {
+        ExcelReader exReader = new ExcelReader();
+        return exReader.getExcelDataRegistrationEmail();
+    }
+
+    @DataProvider(name = "ExcelDataName")
+    public Object[][] userRegisterDataName() throws IOException {
+        ExcelReader exReader = new ExcelReader();
+        return exReader.getExcelDataRegistrationName();
+    }
+
+    @DataProvider(name = "ExcelDataPassword")
+    public Object[][] userRegisterDataPassword() throws IOException {
+        ExcelReader exReader = new ExcelReader();
+        return exReader.getExcelDataRegistrationPassword();
+    }
+
+    @DataProvider(name = "ExcelDataDateOfBirth")
+    public Object[][] userRegisterDataDateOfBirth() throws IOException {
+        ExcelReader exReader = new ExcelReader();
+        return exReader.getExcelDataRegistrationDateOfBirth();
+    }
+
+    @DataProvider(name = "ExcelDataAddress")
+    public Object[][] userRegisterDataAddress() throws IOException {
+        ExcelReader exReader = new ExcelReader();
+        return exReader.getExcelDataRegistrationAddress();
+    }
 
     @BeforeClass
     public void launchBrowser(){
         BrowserActions.initializer(className,"Chrome");
         homePage = new HomePage(className);
         homePage.navigateToHome();
+        signInPage = homePage.clickOnSignIn();
     }
 
-    @Test
-    public void createAnAccount(){
-        signInPage = homePage.clickOnSignIn();
-        signInPage.enterEmail("hag@gmail.com");
+    @Test(dataProvider = "ExcelDataEmail")
+    public void createAnAccount(String email) {
+        signInPage.enterEmailToRegister(email);
         registerPage = signInPage.clickOnCreateAccount();
+        UIActions action = new UIActions(className);
+        action.waitForTime(30);
         //assertEquals(BrowserActions.driver.getTitle(),"Login - My Store");
-
-        }
-
+    }
 
 
     @Test(dependsOnMethods = "createAnAccount")
@@ -56,63 +86,49 @@ public class RegisterTests{
 
     }
 
-    @Test(dependsOnMethods = "selectGender")
-    public void enterName(){
-        registerPage.enterFirstName("Aya");
-        registerPage.enterLastName("Tarek");
+    @Test(dependsOnMethods = "selectGender", dataProvider = "ExcelDataName")
+    public void enterName(String fname, String lname){
+        registerPage.enterFirstName(fname);
+        registerPage.enterLastName(lname);
     }
 
-    @Test(dependsOnMethods = "enterName")
-    public void enterPassword(){
-        registerPage.enterPassword("123345");
+    @Test(dependsOnMethods = "enterName", dataProvider = "ExcelDataPassword")
+    public void enterPassword(String pass){
+        registerPage.enterPassword(pass);
     }
 
-    @Test(dependsOnMethods = "enterPassword")
-    public void enterDateOfBirth(){
-        String dayOption ="4  ";
-        registerPage.selectDayFromDropdown(dayOption);
-        //assert chosen option is correct
-        var selectedDayOptions = registerPage.getSelectedDropdownOptions(By.id("days"));
-        //assertTrue(selectedDayOptions.contains(dayOption),"option not selected");
+    @Test(dependsOnMethods = "enterPassword", dataProvider = "ExcelDataDateOfBirth")
+    public void enterDateOfBirth(String day, String month, String year){
+        registerPage.selectDayFromDropdown(day);
 
-        String monthOption ="February ";
-        registerPage.selectMonthFromDropdown(monthOption);
-        var selectedMonthOptions = registerPage.getSelectedDropdownOptions(By.id("months"));
-        //assertTrue(selectedMonthOptions.contains(monthOption),"option not selected");
+        registerPage.selectMonthFromDropdown(month);
 
+        registerPage.selectYearFromDropdown(year);
 
-        String yearOption ="2009  ";
-        registerPage.selectYearFromDropdown(yearOption);
-        var selectedYearOptions = registerPage.getSelectedDropdownOptions(By.id("years"));
-        //assertTrue(selectedYearOptions.contains(yearOption),"option not selected");
     }
 
-    @Test(dependsOnMethods = "enterDateOfBirth")
-    public void enterAddressInformation(){
+    @Test(dependsOnMethods = "enterDateOfBirth", dataProvider = "ExcelDataAddress")
+    public void enterAddressInformation(String address, String city, String state, String postalCode,
+                                        String phone){
 
-        registerPage.enterAddress("El Manial");
-        registerPage.enterCity("Cairo");
-        registerPage.selectStateFromDropdown("Alabama");
-        var selectedStateOptions = registerPage.getSelectedDropdownOptions(By.id("id_state"));
-        assertTrue(selectedStateOptions.contains("Alabama"),"option not selected");
-        registerPage.enterPostalCode("11865");
-        registerPage.selectCountryFromDropdown("United States");
-        var selectedCountryOptions = registerPage.getSelectedDropdownOptions(By.id("id_country"));
-        assertTrue(selectedCountryOptions.contains("United States"),"option not selected");
-        registerPage.enterMobileNumber("0123456789");
+        registerPage.enterAddress(address);
+        registerPage.enterCity(city);
+        registerPage.selectStateFromDropdown(state);
+        registerPage.enterPostalCode(postalCode);
+        registerPage.enterMobileNumber(phone);
 
     }
     @Test(dependsOnMethods = "enterAddressInformation",groups={"registerGroup"})
     public void pressRegister(){
 
        myAccount = registerPage.clickRegister();
-        //assertEquals(BrowserActions.driver.getTitle(),"My account - My Store");
+       //assertEquals(BrowserActions.driver.getTitle(),"My account - My Store");
     }
 
     @AfterMethod
     public static void takeScreeshot(ITestResult result) throws IOException {
         if (ITestResult.FAILURE == result.getStatus()) {
-            String className = AccountTests.class.getName();
+            String className = RegisterTests.class.getName();
             TakesScreenshot screenshot = (TakesScreenshot) BrowserActions.getDriver(className);
             File source = screenshot.getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(source, new File("./screenshots/" + ".png"));

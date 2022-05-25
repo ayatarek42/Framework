@@ -1,5 +1,6 @@
 package tests;
 
+import data.ExcelReader;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -14,8 +15,7 @@ import utilities.BrowserActions;
 import java.io.File;
 import java.io.IOException;
 
-import static utilities.BrowserActions.driver;
-import static utilities.BrowserActions.drivers;
+
 
 
 public class AccountTests {
@@ -27,6 +27,12 @@ public class AccountTests {
     String className = AccountTests.class.getName();
 
 
+    @DataProvider(name = "ExcelData")
+    public Object[][] userLoginData() throws IOException {
+        ExcelReader exReader = new ExcelReader();
+        return exReader.getExcelDataLogin();
+    }
+
     @BeforeClass
     @Parameters({"browser"})
     public void launchBrowser(String browserName) {
@@ -35,13 +41,13 @@ public class AccountTests {
         homePage.navigateToHome();
     }
 
-    @Test(groups = "loginGroup")
-    public void Login() {
-        signInPage = homePage.clickOnSignIn();
-        signInPage.enterEmailToLogin("aya42@gmail.com");
-        signInPage.enterPasswordToLogin("123345");
-        myAccount = signInPage.clickOnLoginButton();
 
+    @Test(groups = "loginGroup", dataProvider = "ExcelData")
+    public void Login(String email, String password) {
+        signInPage = homePage.clickOnSignIn();
+        signInPage.enterEmailToLogin(email);
+        signInPage.enterPasswordToLogin(password);
+        myAccount = signInPage.clickOnLoginButton();
     }
 
     @Test(dependsOnGroups = "loginGroup")

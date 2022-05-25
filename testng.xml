@@ -7,10 +7,9 @@
             <parameter name="browser" value="Chrome"></parameter>
             </class>
 
-
-            <class name = "tests.GoToDressesTests">
+           <class name = "tests.GoToDressesTests">
             <parameter name="browser" value="Firefox"></parameter>
-            </class>
+           </class>
         </classes>
     </test>
 </suite>

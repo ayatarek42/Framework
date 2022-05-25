@@ -1,17 +1,14 @@
 package utilities;
 
-import org.apache.commons.io.FileUtils;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.io.File;
-import java.io.IOException;
 import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
-import static utilities.BrowserActions.driver;
 
 public class UIActions {
 
@@ -19,6 +16,10 @@ public class UIActions {
 
     public UIActions(String className) {
         this.driver = BrowserActions.drivers.get(className);
+    }
+
+    public void waitForTime(int time) {
+        driver.manage().timeouts().implicitlyWait(time, TimeUnit.SECONDS);
     }
 
     public void navigateTo(String URL) {
@@ -65,6 +66,15 @@ public class UIActions {
     }
 
 
+    public void alert_clickToAccept(){
+        driver.switchTo().alert().accept();
+    }
+    public void alert_clickToDismiss(){
+        driver.switchTo().alert().dismiss();
+    }
+    public String getAlertText(){
+        return driver.switchTo().alert().getText();
+    }
+
+
 }
-
-

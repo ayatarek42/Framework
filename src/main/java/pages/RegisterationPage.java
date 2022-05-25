@@ -25,19 +25,18 @@ public class RegisterationPage {
     protected By country = By.id("id_country");
     protected By mobileNumber = By.id("phone_mobile");
     protected By register = By.id("submitAccount");
-    UIActions action;
+    UIActions action ;
     String className;
 
     public RegisterationPage(String className) {
+        this.className = className;
+        action = new UIActions(className);
 
-            action = new UIActions(className);
-            this.className = className;
     }
-
 
     public void selectGender() {
        action.waitForPageLoad(radioButtonGender, 60);
-       action.findWebElement(radioButtonGender).click();
+       action.clickOnElement(radioButtonGender);
     }
 
     public void enterFirstName(String firstName) {
@@ -87,7 +86,7 @@ public class RegisterationPage {
         action.enterTextInTextField(mobile,mobileNumber);
     }
     public MyAccountPage clickRegister(){
-        action.findWebElement(register).click();
+        action.clickOnElement(register);
         return new MyAccountPage(className);
     }
 

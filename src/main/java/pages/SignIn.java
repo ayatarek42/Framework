@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Wait;
 import utilities.BrowserActions;
 import utilities.UIActions;
 
@@ -21,28 +22,26 @@ public class SignIn{
         this.className = className;
     }
 
-    public void enterEmail(String email){
-        action.findWebElement(emailField).sendKeys(email);
-
+    public void enterEmailToRegister(String email){
+        action.enterTextInTextField(email,emailField);
     }
 
     public RegisterationPage clickOnCreateAccount(){
-        action.findWebElement(createAccount).click();
+        action.clickOnElement(createAccount);
         return new RegisterationPage(className);
     }
 
     public void enterEmailToLogin(String email){
-       action.findWebElement(authEmail).sendKeys(email);
+       action.enterTextInTextField(email,authEmail);
 
     }
     public void enterPasswordToLogin(String password){
-        action.findWebElement(authPassword).sendKeys(password);
+        action.enterTextInTextField(password,authPassword);
 
     }
     public MyAccountPage clickOnLoginButton(){
-        action.findWebElement(loginButton).click();
+        action.clickOnElement(loginButton);
         return new MyAccountPage(className);
-
     }
 
 }
