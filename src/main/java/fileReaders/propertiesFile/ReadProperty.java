@@ -1,12 +1,11 @@
-package data;
+package propertiesFile;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
 public class ReadProperty {
-    public static Properties loginData;
+    public static Properties URLData;
 
 
 
@@ -18,10 +17,9 @@ public class ReadProperty {
         return property;
     }
 
-
     static {
         try {
-            loginData = loadProperties(System.getProperty("user.dir")+ "/src/main/java/properties/loginDataProperties");
+            URLData = loadProperties(System.getProperty("user.dir")+ "/src/main/java/propertiesFile/URLData");
         } catch (IOException e) {
             System.out.println("error occured: " + e.getMessage());
         }

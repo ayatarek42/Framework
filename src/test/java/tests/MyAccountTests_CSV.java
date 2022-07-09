@@ -5,13 +5,16 @@ import com.opencsv.exceptions.CsvValidationException;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import pages.HomePage;
 import pages.MyAccountPage;
 import pages.SignIn;
 import pages.WomenPage;
+import screenshot.Screenshots;
 import utilities.BrowserActions;
+import utilities.UIActions;
 
 import java.io.File;
 import java.io.FileReader;
@@ -27,6 +30,7 @@ public class MyAccountTests {
     protected WomenPage womenPage;
 
     String className = MyAccountTests.class.getName();
+
 
     CSVReader reader;
 
@@ -51,18 +55,24 @@ public class MyAccountTests {
         signInPage.enterEmailToLogin(email);
         signInPage.enterPasswordToLogin(password);
         myAccount = signInPage.clickOnLoginButton();
+        UIActions action = new UIActions(className);
+        Assert.assertEquals(action.getPageTitle(),"My account - My Store");
         }
     }
 
     @Test(dependsOnGroups = "loginGroup")
     public void goToWomen() {
         womenPage = myAccount.clickOnWomen();
+        UIActions action = new UIActions(className);
+        Assert.assertEquals(action.getPageTitle(),"Women - My Store");
     }
 
     @Test(dependsOnMethods = "goToWomen")
     public void goToProfile() {
 
         womenPage.clickProfile();
+        UIActions action = new UIActions(className);
+        Assert.assertEquals(action.getPageTitle(),"My account - My Store");
     }
 
     @Test(dependsOnMethods = "goToProfile")
@@ -76,13 +86,8 @@ public class MyAccountTests {
     }
 
     @AfterMethod
-    public static void takeScreeshot(ITestResult result) throws IOException {
-        if (ITestResult.FAILURE == result.getStatus()) {
-            String className = MyAccountTests.class.getName();
-            TakesScreenshot screenshot = (TakesScreenshot) BrowserActions.getDriver(className);
-            File source = screenshot.getScreenshotAs(OutputType.FILE);
-            FileUtils.copyFile(source, new File("./screenshots/" + ".png"));
-        }
+    public void takeScreenshotOnFailure(ITestResult result) throws IOException {
+        Screenshots.takeScreeshot(result);
     }
 
 }

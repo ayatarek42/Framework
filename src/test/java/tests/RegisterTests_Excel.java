@@ -13,12 +13,15 @@ import pages.HomePage;
 import pages.MyAccountPage;
 import pages.RegisterationPage;
 import pages.SignIn;
+import screenshot.Screenshots;
 import utilities.BrowserActions;
 import utilities.UIActions;
 
 
 import java.io.File;
 import java.io.IOException;
+
+import static org.testng.Assert.assertEquals;
 
 public class RegisterTests{
 
@@ -114,8 +117,8 @@ public class RegisterTests{
         registerPage.selectStateFromDropdown(state);
         registerPage.enterPostalCode(postalCode);
         registerPage.enterMobileNumber(phone);
-
     }
+
     @Test(dependsOnMethods = "enterAddressInformation",groups={"registerGroup"})
     public void pressRegister(){
 
@@ -124,13 +127,8 @@ public class RegisterTests{
     }
 
     @AfterMethod
-    public static void takeScreeshot(ITestResult result) throws IOException {
-        if (ITestResult.FAILURE == result.getStatus()) {
-            String className = RegisterTests.class.getName();
-            TakesScreenshot screenshot = (TakesScreenshot) BrowserActions.getDriver(className);
-            File source = screenshot.getScreenshotAs(OutputType.FILE);
-            FileUtils.copyFile(source, new File("./screenshots/" + ".png"));
-        }
+    public void takeScreenshotOnFailure(ITestResult result) throws IOException {
+        Screenshots.takeScreeshot(result);
     }
 }
 

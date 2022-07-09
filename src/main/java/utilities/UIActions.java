@@ -76,5 +76,17 @@ public class UIActions {
         return driver.switchTo().alert().getText();
     }
 
+    public String getSelectedDropdownOption(By by) {
+        WebElement selectedElement = new Select(driver.findElement(by)).getFirstSelectedOption();
+        return selectedElement.getText();
+    }
+
+    public String getPageTitle(){
+        return driver.getTitle();
+    }
+
+    public String getElementText(By by){
+        return findWebElement(by).getText();
+    }
 
 }

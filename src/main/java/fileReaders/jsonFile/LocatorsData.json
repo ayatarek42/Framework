@@ -1,0 +1,73 @@
+[
+  {
+    "index": "0",
+    "pageName": "HomePage",
+    "name": "signIn",
+    "locateUsing": "CssSelector",
+    "locator": ".login"
+  },
+  {
+    "index": "1",
+    "pageName": "HomePage",
+    "name": "dressesBtn",
+    "locateUsing": "xpath",
+    "locator": "//*[@id=\"block_top_menu\"]/ul/li[2]/a"
+  },
+
+  {
+    "index": "2",
+    "pageName": "MyAccountPage",
+    "name": "woman",
+    "locateUsing": "linkText",
+    "locator": "Women"
+  },
+  {
+    "index": "3",
+    "pageName": "MyAccountPage",
+    "name": "signOut",
+    "locateUsing": "linkText",
+    "locator": "Sign out"
+  },
+  {
+    "index": "4",
+    "pageName": "WomenPage",
+    "name": "profileBtn",
+    "locateUsing": "XPath",
+    "locator": "//a[@title=\"View my customer account\"]"
+  },
+  {
+    "index": "5",
+    "pageName": "SignInPage",
+    "name": "emailField",
+    "locateUsing": "id",
+    "locator": "email_create"
+  },
+  {
+    "index": "6",
+    "pageName": "SignInPage",
+    "name": "createAccountBtn",
+    "locateUsing": "id",
+    "locator": "SubmitCreate"
+  },
+  {
+    "index": "7",
+    "pageName": "SignInPage",
+    "name": "authEmail",
+    "locateUsing": "id",
+    "locator": "email"
+  },
+  {
+    "index": "8",
+    "pageName": "SignInPage",
+    "name": "authPassword",
+    "locateUsing": "id",
+    "locator": "passwd"
+  },
+  {
+    "index": "9",
+    "pageName": "SignInPage",
+    "name": "loginBtn",
+    "locateUsing": "id",
+    "locator": "SubmitLogin"
+  }
+]
