@@ -1,9 +1,7 @@
 package tests;
 
-import data.ExcelReader;
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
+import data.excel.ExcelReader;
+import org.json.simple.parser.ParseException;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -18,22 +16,21 @@ import utilities.BrowserActions;
 import utilities.UIActions;
 
 
-import java.io.File;
 import java.io.IOException;
 
 import static org.testng.Assert.assertEquals;
 
-public class RegisterTests{
+public class RegisterTests_Excel {
 
     HomePage homePage;
     SignIn signInPage;
     MyAccountPage myAccount;
     RegisterationPage registerPage;
-    String className =  RegisterTests.class.getName();
+    String className =  RegisterTests_Excel.class.getName();
 
 
     @BeforeClass
-    public void launchBrowser(){
+    public void launchBrowser() throws IOException, ParseException {
         BrowserActions.initializer(className,"Chrome");
         homePage = new HomePage(className);
         homePage.navigateToHome();
@@ -71,35 +68,33 @@ public class RegisterTests{
     }
 
     @Test(dataProvider = "ExcelDataEmail")
-    public void createAnAccount(String email) {
+    public void createAnAccount(String email) throws IOException, ParseException {
         signInPage.enterEmailToRegister(email);
         registerPage = signInPage.clickOnCreateAccount();
         UIActions action = new UIActions(className);
         action.waitForTime(10);
-        //assertEquals(BrowserActions.driver.getTitle(),"Login - My Store");
+        assertEquals(action.getPageTitle(),"Login - My Store");
     }
 
 
     @Test(dependsOnMethods = "createAnAccount")
-    public void selectGender(){
-        registerPage.selectGender();
-        //assertEquals(BrowserActions.driver.findElement(By.id("id_gender2")).isSelected(),true);
-
+    public void selectGender() throws IOException, ParseException {
+       registerPage.selectGender();
     }
 
     @Test(dependsOnMethods = "selectGender", dataProvider = "ExcelDataName")
-    public void enterName(String fname, String lname){
+    public void enterName(String fname, String lname) throws IOException, ParseException {
         registerPage.enterFirstName(fname);
         registerPage.enterLastName(lname);
     }
 
     @Test(dependsOnMethods = "enterName", dataProvider = "ExcelDataPassword")
-    public void enterPassword(String pass){
+    public void enterPassword(String pass) throws IOException, ParseException {
         registerPage.enterPassword(pass);
     }
 
     @Test(dependsOnMethods = "enterPassword", dataProvider = "ExcelDataDateOfBirth")
-    public void enterDateOfBirth(String day, String month, String year){
+    public void enterDateOfBirth(String day, String month, String year) throws IOException, ParseException {
         registerPage.selectDayFromDropdown(day);
 
         registerPage.selectMonthFromDropdown(month);
@@ -110,7 +105,7 @@ public class RegisterTests{
 
     @Test(dependsOnMethods = "enterDateOfBirth", dataProvider = "ExcelDataAddress")
     public void enterAddressInformation(String address, String city, String state, String postalCode,
-                                        String phone){
+                                        String phone) throws IOException, ParseException {
 
         registerPage.enterAddress(address);
         registerPage.enterCity(city);
@@ -120,10 +115,11 @@ public class RegisterTests{
     }
 
     @Test(dependsOnMethods = "enterAddressInformation",groups={"registerGroup"})
-    public void pressRegister(){
+    public void pressRegister() throws IOException, ParseException {
 
        myAccount = registerPage.clickRegister();
-       //assertEquals(BrowserActions.driver.getTitle(),"My account - My Store");
+       UIActions action = new UIActions(className);
+       assertEquals(action.getPageTitle(),"My account - My Store");
     }
 
     @AfterMethod

@@ -53,7 +53,7 @@
                 </property>
             </activation>
             <properties>
-                    <testNGSuite>testng.xml</testNGSuite>
+                <testNGSuite>testng.xml</testNGSuite>
             </properties>
 
         </profile>
@@ -74,12 +74,14 @@
             <artifactId>selenium-chrome-driver</artifactId>
             <version>4.1.2</version>
         </dependency>
+
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>7.5</version>
+            <version>7.6.0</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>io.testsmith</groupId>
             <artifactId>webdriver-testng-archetype</artifactId>
@@ -151,6 +153,25 @@
             <artifactId>opencsv</artifactId>
             <version>5.6</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>7.3.4</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>5.1.1</version>
+            <scope>test</scope>
+        </dependency>
+
 
     </dependencies>
 

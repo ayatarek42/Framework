@@ -3,7 +3,7 @@
 
     <test name = "My account page" parallel = "classes" thread-count = "2">
         <classes>
-            <class name = "tests.MyAccountTests">
+            <class name = "tests.MyAccountTests_CSV">
             <parameter name="browser" value="Chrome"></parameter>
             </class>
 

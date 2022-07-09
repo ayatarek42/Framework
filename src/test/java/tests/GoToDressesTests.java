@@ -1,14 +1,14 @@
 package tests;
 
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
+import org.json.simple.parser.ParseException;
+import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import pages.HomePage;
+import screenshot.Screenshots;
 import utilities.BrowserActions;
+import utilities.UIActions;
 
-import java.io.File;
 import java.io.IOException;
 
 public class GoToDressesTests {
@@ -25,8 +25,11 @@ public class GoToDressesTests {
 
 
     @Test
-    public void goToDressesPage() {
+    public void goToDressesPage() throws IOException, ParseException {
         homePage.clickOnDresses();
+        UIActions action = new UIActions(className);
+        action.waitForTime(10);
+        Assert.assertEquals(action.getPageTitle(),"Dresses - My Store");
     }
 
 
@@ -36,13 +39,8 @@ public class GoToDressesTests {
     }
 
     @AfterMethod
-    public static void takeScreeshot(ITestResult result) throws IOException {
-        if (ITestResult.FAILURE == result.getStatus()) {
-            String className = MyAccountTests.class.getName();
-            TakesScreenshot screenshot = (TakesScreenshot) BrowserActions.getDriver(className);
-            File source = screenshot.getScreenshotAs(OutputType.FILE);
-            FileUtils.copyFile(source, new File("./screenshots/" + ".png"));
-        }
+    public void takeScreenshotOnFailure(ITestResult result) throws IOException {
+        Screenshots.takeScreeshot(result);
     }
 
 

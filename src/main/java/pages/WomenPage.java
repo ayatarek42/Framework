@@ -1,23 +1,29 @@
 package pages;
 
+import fileReaders.jsonFile.JsonReader;
+import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
-import utilities.BrowserActions;
 import utilities.UIActions;
+
+import java.io.IOException;
 
 public class WomenPage{
 
-    By profile = By.xpath("//a[@title=\"View my customer account\"]");
     UIActions action;
     String className;
+    JsonReader reader = new JsonReader();
+    String loc = null;
+
 
     public WomenPage(String className) {
         action = new UIActions(className);
         this.className = className;
     }
 
-    public void clickProfile(){
+    public void clickProfile() throws IOException, ParseException {
+        loc = reader.jsonReaderLocator(4);
+        By profile = By.xpath(loc);
         action.clickOnElement(profile);
     }
-
 
 }

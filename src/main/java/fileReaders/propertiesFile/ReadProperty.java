@@ -1,4 +1,4 @@
-package propertiesFile;
+package fileReaders.propertiesFile;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -19,7 +19,7 @@ public class ReadProperty {
 
     static {
         try {
-            URLData = loadProperties(System.getProperty("user.dir")+ "/src/main/java/propertiesFile/URLData");
+            URLData = loadProperties(System.getProperty("user.dir")+ "/src/main/java/fileReaders/propertiesFile/URLData");
         } catch (IOException e) {
             System.out.println("error occured: " + e.getMessage());
         }

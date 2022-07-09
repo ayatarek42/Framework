@@ -2,9 +2,7 @@ package tests;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
+import org.json.simple.parser.ParseException;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
@@ -16,20 +14,17 @@ import screenshot.Screenshots;
 import utilities.BrowserActions;
 import utilities.UIActions;
 
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
 
-
-
-public class MyAccountTests {
+public class MyAccountTests_CSV {
     protected HomePage homePage;
     protected SignIn signInPage;
     public MyAccountPage myAccount;
     protected WomenPage womenPage;
 
-    String className = MyAccountTests.class.getName();
+    String className = MyAccountTests_CSV.class.getName();
 
 
     CSVReader reader;
@@ -44,8 +39,8 @@ public class MyAccountTests {
 
 
     @Test(groups = "loginGroup")
-    public void Login() throws IOException, CsvValidationException {
-        String csv_file = System.getProperty("user.dir") + "/src/test/java/data/loginData.csv";
+    public void Login() throws IOException, CsvValidationException, ParseException {
+        String csv_file = System.getProperty("user.dir") + "/src/test/java/data/csv/loginData.csv";
         reader = new CSVReader(new FileReader(csv_file));
         String[] csvCell;
         while((csvCell = reader.readNext()) != null){
@@ -61,14 +56,14 @@ public class MyAccountTests {
     }
 
     @Test(dependsOnGroups = "loginGroup")
-    public void goToWomen() {
+    public void goToWomen() throws IOException, ParseException {
         womenPage = myAccount.clickOnWomen();
         UIActions action = new UIActions(className);
         Assert.assertEquals(action.getPageTitle(),"Women - My Store");
     }
 
     @Test(dependsOnMethods = "goToWomen")
-    public void goToProfile() {
+    public void goToProfile() throws IOException, ParseException {
 
         womenPage.clickProfile();
         UIActions action = new UIActions(className);
@@ -76,7 +71,7 @@ public class MyAccountTests {
     }
 
     @Test(dependsOnMethods = "goToProfile")
-    public void logout(){
+    public void logout() throws IOException, ParseException {
         myAccount.clickOnSignOut();
     }
 

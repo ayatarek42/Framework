@@ -1,9 +1,7 @@
-package data;
+package data.excel;
 
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.DataFormatter;
-import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -19,7 +17,7 @@ public class ExcelReader {
 
     static FileInputStream registerFile = null;
     public FileInputStream getFileInputStreamReg(){
-        String filePath = System.getProperty("user.dir") + "/src/test/java/data/registrationData.xlsx";
+        String filePath = System.getProperty("user.dir") + "/src/test/java/data/excel/registrationData.xlsx";
         File srcFile = new File(filePath);
         try {
             registerFile = new FileInputStream(srcFile);

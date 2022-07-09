@@ -1,20 +1,19 @@
 package pages;
 
+import fileReaders.jsonFile.JsonReader;
+import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.Wait;
-import utilities.BrowserActions;
 import utilities.UIActions;
+
+import java.io.IOException;
 
 public class SignIn{
 
-    By emailField = By.id("email_create");
-    By createAccount = By.xpath("//button[@id=\"SubmitCreate\"]");
-    By authEmail = By.id("email");
-    By authPassword = By.id("passwd");
-    By loginButton = By.id("SubmitLogin");
     UIActions action;
     String className;
+    JsonReader reader = new JsonReader();
+    String loc = null;
+
 
     public SignIn(String className) {
 
@@ -22,24 +21,34 @@ public class SignIn{
         this.className = className;
     }
 
-    public void enterEmailToRegister(String email){
+    public void enterEmailToRegister(String email) throws IOException, ParseException {
+        loc = reader.jsonReaderLocator(5);
+        By emailField = By.id(loc);
         action.enterTextInTextField(email,emailField);
     }
 
-    public RegisterationPage clickOnCreateAccount(){
+    public RegisterationPage clickOnCreateAccount() throws IOException, ParseException {
+        loc = reader.jsonReaderLocator(6);
+        By createAccount = By.id(loc);
         action.clickOnElement(createAccount);
         return new RegisterationPage(className);
     }
 
-    public void enterEmailToLogin(String email){
-       action.enterTextInTextField(email,authEmail);
+    public void enterEmailToLogin(String email) throws IOException, ParseException {
+        loc = reader.jsonReaderLocator(7);
+        By authEmail = By.id(loc);
+        action.enterTextInTextField(email,authEmail);
 
     }
-    public void enterPasswordToLogin(String password){
+    public void enterPasswordToLogin(String password) throws IOException, ParseException {
+        loc = reader.jsonReaderLocator(8);
+        By authPassword = By.id(loc);
         action.enterTextInTextField(password,authPassword);
 
     }
-    public MyAccountPage clickOnLoginButton(){
+    public MyAccountPage clickOnLoginButton() throws IOException, ParseException {
+        loc = reader.jsonReaderLocator(9);
+        By loginButton = By.id(loc);
         action.clickOnElement(loginButton);
         return new MyAccountPage(className);
     }

@@ -1,4 +1,4 @@
-package jsonFile;
+package fileReaders.jsonFile;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -14,7 +14,7 @@ public class JsonReader {
     public String locat;
 
     public  String jsonReaderLocator(int i) throws IOException, ParseException {
-        String filePath = System.getProperty("user.dir") + "/src/main/java/jsonFile/LocatorsData.json";
+        String filePath = System.getProperty("user.dir") + "/src/main/java/fileReaders/jsonFile/LocatorsData.json";
         File srcFile = new File(filePath);
         JSONParser jsonParser = new JSONParser();
         JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader(srcFile));

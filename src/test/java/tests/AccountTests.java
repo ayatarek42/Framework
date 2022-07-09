@@ -2,6 +2,7 @@ package tests;
 
 import data.ExcelReader;
 import org.apache.commons.io.FileUtils;
+import org.json.simple.parser.ParseException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestResult;
@@ -43,7 +44,7 @@ public class AccountTests {
 
 
     @Test(groups = "loginGroup", dataProvider = "ExcelData")
-    public void Login(String email, String password) {
+    public void Login(String email, String password) throws IOException, ParseException {
         signInPage = homePage.clickOnSignIn();
         signInPage.enterEmailToLogin(email);
         signInPage.enterPasswordToLogin(password);
@@ -51,12 +52,12 @@ public class AccountTests {
     }
 
     @Test(dependsOnGroups = "loginGroup")
-    public void goToWomen() {
+    public void goToWomen() throws IOException, ParseException {
         womenPage = myAccount.clickOnWomen();
     }
 
     @Test(dependsOnMethods = "goToWomen")
-    public void goToProfile() {
+    public void goToProfile() throws IOException, ParseException {
 
         womenPage.clickProfile();
     }

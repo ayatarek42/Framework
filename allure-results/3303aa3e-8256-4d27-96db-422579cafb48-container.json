@@ -1,0 +1,1 @@
+{"uuid":"3303aa3e-8256-4d27-96db-422579cafb48","name":"tests.RestAssured","children":["70c2fe22-743a-4877-96f7-314775f0c475"],"befores":[{"name":"createRequestSpecification","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1654445366348,"stop":1654445366952}],"afters":[],"start":1654445366277,"stop":1654445368702}

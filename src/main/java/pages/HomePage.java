@@ -1,35 +1,42 @@
 package pages;
 
+import fileReaders.jsonFile.JsonReader;
+import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
+import fileReaders.propertiesFile.ReadProperty;
 import utilities.UIActions;
+
+import java.io.IOException;
 
 
 public class HomePage {
-
-    By signIn = new By.ByCssSelector(".login");
-    By dressesBtn = By.xpath("//*[@id=\"block_top_menu\"]/ul/li[2]/a");
-    String homepageURL = "http://automationpractice.com/";
     UIActions action;
     String className;
+    JsonReader  reader = new JsonReader();
+    String loc = null;
+
 
     public HomePage(String className) {
         this.className = className;
         action = new UIActions(className);
-
     }
 
     public void navigateToHome(){
-       action.navigateTo(homepageURL);
+        String homepageURL = ReadProperty.URLData.getProperty("URL");
+        action.navigateTo(homepageURL);
     }
 
-    public SignIn clickOnSignIn()
-    {
+    public SignIn clickOnSignIn() throws IOException, ParseException {
+        loc = reader.jsonReaderLocator(0);
+        By signIn = new By.ByCssSelector(loc);
         action.clickOnElement(signIn);
         return new SignIn(className);
     }
 
-    public Dresses clickOnDresses()
-    {
+
+    public Dresses clickOnDresses() throws IOException, ParseException {
+        loc = reader.jsonReaderLocator(1);
+        By dressesBtn = By.xpath(loc);
         action.clickOnElement(dressesBtn);
         return new Dresses();
     }

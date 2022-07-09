@@ -1,14 +1,19 @@
 package pages;
 
+import fileReaders.jsonFile.JsonReader;
+import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
 import utilities.UIActions;
 
+import java.io.IOException;
+
 public class MyAccountPage {
 
-       By women = By.linkText("Women");
-       By signOut = By.linkText("Sign out");
-       UIActions action ;
-       String className;
+    UIActions action ;
+    String className;
+    JsonReader reader = new JsonReader();
+    String loc = null;
+
 
     public MyAccountPage(String className) {
         this.className = className;
@@ -16,13 +21,16 @@ public class MyAccountPage {
 
     }
 
-    public WomenPage clickOnWomen(){
-            action.clickOnElement(women);
-            return new WomenPage(className);
+    public WomenPage clickOnWomen() throws IOException, ParseException {
+        loc = reader.jsonReaderLocator(2);
+        By women = By.linkText(loc);
+        action.clickOnElement(women);
+        return new WomenPage(className);
         }
 
-    public HomePage clickOnSignOut(){
+    public void clickOnSignOut() throws IOException, ParseException {
+        loc = reader.jsonReaderLocator(3);
+        By signOut = By.linkText(loc);
         action.clickOnElement(signOut);
-        return new HomePage(className);
     }
 }

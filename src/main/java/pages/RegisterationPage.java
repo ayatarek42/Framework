@@ -1,32 +1,19 @@
 package pages;
 
+import fileReaders.jsonFile.JsonReader;
+import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 import utilities.UIActions;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.io.IOException;
 
 
 public class RegisterationPage {
 
-    protected By radioButtonGender = By.id("id_gender2");
-    protected By first_name = By.id("customer_firstname");
-    protected By last_name = By.id("customer_lastname");
-    protected By password = By.id("passwd");
-    protected By dayDateOfBirth = By.id("days");
-    protected By monthDateOfBirth = By.id("months");
-    protected By yearDateOfBirth = By.id("years");
-    protected By address = By.id("address1");
-    protected By city = By.id("city");
-    protected By state = By.id("id_state");
-    protected By postalCode = By.id("postcode");
-    protected By country = By.id("id_country");
-    protected By mobileNumber = By.id("phone_mobile");
-    protected By register = By.id("submitAccount");
     UIActions action ;
     String className;
+    JsonReader reader = new JsonReader();
+    String loc = null;
 
     public RegisterationPage(String className) {
         this.className = className;
@@ -34,64 +21,84 @@ public class RegisterationPage {
 
     }
 
-    public void selectGender() {
-       action.waitForPageLoad(radioButtonGender, 60);
-       action.clickOnElement(radioButtonGender);
+    public void selectGender() throws IOException, ParseException {
+        loc = reader.jsonReaderLocator(10);
+        By radioButtonGender = By.id(loc);
+        action.waitForPageLoad(radioButtonGender, 60);
+        action.clickOnElement(radioButtonGender);
     }
 
-    public void enterFirstName(String firstName) {
+    public void enterFirstName(String firstName) throws IOException, ParseException {
+        loc = reader.jsonReaderLocator(11);
+        By first_name = By.id(loc);
         action.enterTextInTextField(firstName,first_name);
     }
 
-    public void enterLastName(String lastName) {
+    public void enterLastName(String lastName) throws IOException, ParseException {
+        loc = reader.jsonReaderLocator(12);
+        By last_name = By.id(loc);
         action.enterTextInTextField(lastName,last_name);
     }
 
-    public void enterPassword(String passwd) {
+    public void enterPassword(String passwd) throws IOException, ParseException {
+        loc = reader.jsonReaderLocator(13);
+        By password = By.id(loc);
         action.enterTextInTextField(passwd,password);
     }
 
 
-    public void selectDayFromDropdown(String option) {
+    public void selectDayFromDropdown(String option) throws IOException, ParseException {
+        loc = reader.jsonReaderLocator(14);
+        By dayDateOfBirth = By.id(loc);
         action.selectFromDropdownList(option,dayDateOfBirth);
     }
-
-
-    public void selectMonthFromDropdown(String option) {
+    public void selectMonthFromDropdown(String option) throws IOException, ParseException {
+        loc = reader.jsonReaderLocator(15);
+        By monthDateOfBirth = By.id(loc);
         action.selectFromDropdownList(option,monthDateOfBirth);
     }
 
-    public void selectYearFromDropdown(String option) {
+    public void selectYearFromDropdown(String option) throws IOException, ParseException {
+        loc = reader.jsonReaderLocator(16);
+        By yearDateOfBirth = By.id(loc);
         action.selectFromDropdownList(option,yearDateOfBirth);
     }
 
-    public void enterAddress(String adress) {
+    public void enterAddress(String adress) throws IOException, ParseException {
+        loc = reader.jsonReaderLocator(17);
+        By address = By.id(loc);
         action.enterTextInTextField(adress,address);
     }
-    public void enterCity(String cityy) {
+
+    public void enterCity(String cityy) throws IOException, ParseException {
+        loc = reader.jsonReaderLocator(18);
+        By city = By.id(loc);
         action.enterTextInTextField(cityy,city);
     }
 
-    public void selectStateFromDropdown(String option) {
+    public void selectStateFromDropdown(String option) throws IOException, ParseException {
+        loc = reader.jsonReaderLocator(19);
+        By state = By.id(loc);
         action.selectFromDropdownList(option,state);
     }
-    public void enterPostalCode(String code) {
+
+    public void enterPostalCode(String code) throws IOException, ParseException {
+        loc = reader.jsonReaderLocator(20);
+        By postalCode = By.id(loc);
         action.enterTextInTextField(code,postalCode);
     }
 
-    public void selectCountryFromDropdown(String option) {
-        action.selectFromDropdownList(option,country);
-    }
-    public void enterMobileNumber(String mobile) {
+
+    public void enterMobileNumber(String mobile) throws IOException, ParseException {
+        loc = reader.jsonReaderLocator(21);
+        By mobileNumber = By.id(loc);
         action.enterTextInTextField(mobile,mobileNumber);
     }
-    public MyAccountPage clickRegister(){
+    public MyAccountPage clickRegister() throws IOException, ParseException {
+        loc = reader.jsonReaderLocator(22);
+        By register = By.id(loc);
         action.clickOnElement(register);
         return new MyAccountPage(className);
     }
 
-    public List<String> getSelectedDropdownOptions(By by) {
-        List<WebElement> selectedElements = new Select(action.findWebElement(by)).getAllSelectedOptions();
-        return selectedElements.stream().map(e -> e.getText()).collect(Collectors.toList());
-    }
 }

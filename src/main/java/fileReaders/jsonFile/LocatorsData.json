@@ -69,5 +69,100 @@
     "name": "loginBtn",
     "locateUsing": "id",
     "locator": "SubmitLogin"
+  },
+  {
+    "index": "10",
+    "pageName": "RegistrationPage",
+    "name": "gender",
+    "locateUsing": "id",
+    "locator": "id_gender2"
+  },
+  {
+    "index": "11",
+    "pageName": "RegistrationPage",
+    "name": "fName",
+    "locateUsing": "id",
+    "locator": "customer_firstname"
+  },
+  {
+    "index": "12",
+    "pageName": "RegistrationPage",
+    "name": "lName",
+    "locateUsing": "id",
+    "locator": "customer_lastname"
+  },
+  {
+    "index": "13",
+    "pageName": "RegistrationPage",
+    "name": "password",
+    "locateUsing": "id",
+    "locator": "passwd"
+  },
+
+  {
+    "index": "14",
+    "pageName": "RegistrationPage",
+    "name": "day",
+    "locateUsing": "id",
+    "locator": "days"
+  },
+  {
+    "index": "15",
+    "pageName": "RegistrationPage",
+    "name": "month",
+    "locateUsing": "id",
+    "locator": "months"
+  },
+
+  {
+    "index": "16",
+    "pageName": "RegistrationPage",
+    "name": "year",
+    "locateUsing": "id",
+    "locator": "years"
+  },
+  {
+    "index": "17",
+    "pageName": "RegistrationPage",
+    "name": "address",
+    "locateUsing": "id",
+    "locator": "address1"
+  },
+
+  {
+    "index": "18",
+    "pageName": "RegistrationPage",
+    "name": "city",
+    "locateUsing": "id",
+    "locator": "city"
+  },
+  {
+    "index": "19",
+    "pageName": "RegistrationPage",
+    "name": "state",
+    "locateUsing": "id",
+    "locator": "id_state"
+  },
+  {
+    "index": "20",
+    "pageName": "RegistrationPage",
+    "name": "postalCode",
+    "locateUsing": "id",
+    "locator": "postcode"
+  },
+  {
+    "index": "21",
+    "pageName": "RegistrationPage",
+    "name": "mobileNumber",
+    "locateUsing": "id",
+    "locator": "phone_mobile"
+  },
+  {
+    "index": "22",
+    "pageName": "RegistrationPage",
+    "name": "registerBtn",
+    "locateUsing": "id",
+    "locator": "submitAccount"
   }
+
 ]
